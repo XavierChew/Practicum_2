@@ -1,26 +1,43 @@
 package Logic;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
+// import jakarta.persistence.EntityManager;
+// import jakarta.persistence.Persistence;
+// import services.EmployeeService;
+
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
+import java.util.HashSet;
+import java.util.Set;
 import services.EmployeeService;
+import services.DepartmentService;
+// import java.util.HashMap;
+// import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Map;
+// public class EntityManagerFactory {
+//     static final String DBNAME = "employees";
 
-public class EntityManagerFactory {
-    static final String DBNAME = "employees";
+//     public EntityManagerFactory() {
+//         Map<String,String> persistenceMap = new HashMap<>();
+//         persistenceMap.put("jakarta.persistence.jdbc.url",
+//                 "jdbc:mariadb://localhost:3306/"+DBNAME);
 
-    public EntityManagerFactory() {
-        Map<String,String> persistenceMap = new HashMap<>();
-        persistenceMap.put("jakarta.persistence.jdbc.url",
-                "jdbc:mariadb://localhost:3306/"+DBNAME);
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService", persistenceMap);
-    }
+//         EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService", persistenceMap);
+//     }
 
 
 
-    EntityManager em = emf.createEntityManager();
-    EmployeeService service = new EmployeeService(em);
+//     EntityManager em = emf.createEntityManager();
+//     EmployeeService service = new EmployeeService(em);
 
+// }
+
+@ApplicationPath("/api")
+public class BusinessLogic extends Application {
+        @Override
+        public Set<Class<?>> getClasses() {
+            Set<Class<?>> classes = new HashSet<>();
+            classes.add(EmployeeService.class);
+            classes.add(DepartmentService.class);
+            return classes;
+        }
 }

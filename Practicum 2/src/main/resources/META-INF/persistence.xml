@@ -23,8 +23,8 @@
             <property name="jakarta.persistence.jdbc.driver"
                       value="org.mariadb.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mariadb://localhost:3306/"/>
-            <!-- <property name="jakarta.persistence.jdbc.user" value="ilyas"/> -->
+                      value="jdbc:mariadb://localhost:9090/"/>
+            <property name="jakarta.persistence.jdbc.user" value="ilyas"/>
             <property name="jakarta.persistence.jdbc.password" value="210494"/>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
