@@ -4,7 +4,7 @@ import java.util.Map;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityManager;
-import daos.EmployeeDAO;
+import daos.EmployeeServices;
 import entities.Employee;
 
 public class Driver {
@@ -16,7 +16,7 @@ public class Driver {
 
         try(EntityManagerFactory emf = Persistence.createEntityManagerFactory("EmployeeService", persistenceMap);){
             EntityManager em = emf.createEntityManager();
-            EmployeeDAO employeeDAO = new EmployeeDAO(em);
+            EmployeeServices employeeDAO = new EmployeeServices(em);
             Employee employee = employeeDAO.getEmployee(10001);
             System.out.println(employee);
         } catch (Exception e) {
