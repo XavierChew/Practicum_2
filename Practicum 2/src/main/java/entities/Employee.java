@@ -55,6 +55,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [emp_no=" + emp_no + ", birth_date=" + birth_date + ", first_name=" + first_name + ", last_name=" + last_name + ", gender=" + gender + ", hire_date=" + hire_date + "]";
+        return "Employee \nemp_no = " + emp_no + "\n birth_date = " + birth_date + "\n first_name = " + first_name + "\n last_name = " + last_name + "\n gender = " + gender + "\n hire_date = " + hire_date;
     }
 }
