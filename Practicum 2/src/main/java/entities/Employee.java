@@ -14,12 +14,10 @@ public class Employee {
     @Column(name = "first_name") private String first_name;
     @Column(name = "last_name") private String last_name;
     @Column(name = "gender") private String gender;
-    @Column(name = "hire_date") private Date hire_date;
+    @Column(name = "hire_date") private LocalDate hire_date;
 
     public Employee() {};
 
-
-    @Column(name = "hire_date") private LocalDate hire_date;
 
     public int getEmp_no() {
         return emp_no;
