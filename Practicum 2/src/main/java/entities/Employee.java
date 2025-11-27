@@ -15,7 +15,10 @@ public class Employee {
     @Column(name = "last_name") private String last_name;
     @Column(name = "gender") private String gender;
     @Column(name = "hire_date") private Date hire_date;
-    
+
+    public Employee() {};
+
+
     public int getEmp_no() {
         return emp_no;
     }
