@@ -31,13 +31,3 @@ import services.DepartmentService;
 
 // }
 
-@ApplicationPath("/api")
-public class BusinessLogic extends Application {
-        @Override
-        public Set<Class<?>> getClasses() {
-            Set<Class<?>> classes = new HashSet<>();
-            classes.add(EmployeeService.class);
-            classes.add(DepartmentService.class);
-            return classes;
-        }
-}
