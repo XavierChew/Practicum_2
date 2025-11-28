@@ -1,9 +1,7 @@
 package entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -14,6 +12,15 @@ public class DepartmentEmployee {
     @Id private String dept_no;
     private Date from_date;
     private Date to_date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "emp_no")
+    private Department employee;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dept_no")
+    private Department department;
+
 
 
     public DepartmentEmployee() {

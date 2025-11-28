@@ -1,10 +1,9 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -16,7 +15,21 @@ public class Employee {
     @Column(name = "gender") private String gender;
     @Column(name = "hire_date") private LocalDate hire_date;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Titles> titles;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Salaries> salaries ;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<DepartmentEmployee>  departmentEmployees;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<DepartmentManager>  departmentManagers;
+
     public Employee() {};
+
 
 
     public int getEmp_no() {

@@ -1,15 +1,20 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "departments")
 public class Department {
     @Id @Column(name = "dept_no") private String dept_no;
     private String dept_name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    private List<DepartmentEmployee> departmentEmployees;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    private List<DepartmentManager> departmentManagers;
 
     public Department (){}
 

@@ -2,7 +2,8 @@ package entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @IdClass(DepartmentManagerId.class)
@@ -12,8 +13,16 @@ public class DepartmentManager {
 
     @Id @Column(name="emp_no") private int emp_no;
 
-    private Date from_date;
-    private Date to_date;
+    @ManyToOne
+    @JoinColumn(name = "dept_no")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "emp_no")
+    private Department employee;
+
+    private LocalDate from_date;
+    private LocalDate to_date;
 
 
 }

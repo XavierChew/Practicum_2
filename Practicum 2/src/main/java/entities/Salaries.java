@@ -1,9 +1,6 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +12,10 @@ public class Salaries {
     private int salary;
     private LocalDate from_date;
     private LocalDate to_date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "emp_no")
+    private Employee employee;
 
     public int getEmp_no() { return emp_no; }
     public void setEmp_no(int emp_no) { this.emp_no = emp_no; }

@@ -1,8 +1,6 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +13,10 @@ public class Titles {
     private String title;
     private LocalDate from_date;
     private LocalDate to_date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "emp_no") private Employee employee;
+
 
     public Titles(){}
 
