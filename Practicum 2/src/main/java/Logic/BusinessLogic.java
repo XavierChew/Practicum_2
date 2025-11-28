@@ -1,11 +1,10 @@
 package Logic;
 
- import jakarta.persistence.EntityManager;
- import jakarta.persistence.Persistence;import services.EmployeeService;
+ import jakarta.persistence.*;
+ import services.EmployeeService;
 import entities.Department;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.ws.rs.ApplicationPath;
+ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.List;
@@ -14,13 +13,18 @@ import services.EmployeeService;
 import services.DepartmentService;
  import java.util.HashMap;
  import java.util.Map;
+ import java.util.ArrayList;
 
  public class  BusinessLogic {
 
      private static final String DBNAME = "employees";
      private static EntityManagerFactory emf = null;
+     @PersistenceContext
+     private static EntityManager em = null;
 
-     private BusinessLogic(){
+     public BusinessLogic(){
+         emf = getEntityManagerFactory();
+         em = emf.createEntityManager();
      }
 
      public static EntityManagerFactory getEntityManagerFactory() {
@@ -45,25 +49,24 @@ import services.DepartmentService;
              emf = null;
          }
      }
+
+     public List<Department> findAllDepartment(){
+//        EntityManager em = emf.createEntityManager();
+        List<Department> departments = new ArrayList<>();
+
+        try {
+           departments =  em.createQuery("SELECT d from Department d", Department.class).getResultList();
+
+        } catch (Exception e) {
+            System.err.println("Error fetching all departments: " + e.getMessage());
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return departments;
+    }
+
+
  }
 
-//@ApplicationPath("/api")
-//public class BusinessLogic extends Application {
-//
-//    private EntityManager EntityManagerFactoryService;
-//    private final EntityManagerFactory emf = EntityManagerFactoryService.getEntityManagerFactory();
-//
-//    public List<Department> findAllDepartment(){
-//        EntityManager em = emf.createEntityManager();
-//        List<Department> departments = em.createNamedQuery("Department.findAll", Department.class).getResultList();
-//
-//        return null;
-//    }
-//        @Override
-//        public Set<Class<?>> getClasses() {
-//            Set<Class<?>> classes = new HashSet<>();
-//            classes.add(EmployeeService.class);
-//            classes.add(DepartmentService.class);
-//            return classes;
-//        }
-//}
