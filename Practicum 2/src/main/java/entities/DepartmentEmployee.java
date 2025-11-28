@@ -15,7 +15,7 @@ public class DepartmentEmployee {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_no")
-    private Department employee;
+    private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_no")

@@ -51,7 +51,7 @@ import services.DepartmentService;
      }
 
      public List<Department> findAllDepartment(){
-//        EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
         List<Department> departments = new ArrayList<>();
 
         try {

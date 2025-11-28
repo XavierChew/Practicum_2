@@ -9,23 +9,21 @@ import java.time.LocalDate;
 @Table(name = "titles")
 public class Titles {
 
-    @Id private int emp_no;
-    private String title;
-    private LocalDate from_date;
-    private LocalDate to_date;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "emp_no") private Employee employee;
-
+    @Id private String title;
+    @Id private LocalDate from_date;
+    private LocalDate to_date;
 
     public Titles(){}
 
-    public int getEmp_no() {
-        return emp_no;
+    public Employee getEmp_no() {
+        return employee;
     }
 
-    public void setEmp_no(int emp_no) {
-        this.emp_no = emp_no;
+    public void setEmp_no(Employee employee) {
+        this.employee = employee;
     }
 
     public String getTitle() {
@@ -55,7 +53,7 @@ public class Titles {
     @Override
     public String toString() {
         return "Titles{" +
-                "emp_no=" + emp_no +
+                "employee=" + employee +
                 ", title='" + title + '\'' +
                 ", from_date=" + from_date +
                 ", to_date=" + to_date +

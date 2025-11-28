@@ -7,18 +7,21 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "salaries")
 public class Salaries {
-    @Id
-    @Column(name = "emp_no") private int emp_no;
-    private int salary;
-    private LocalDate from_date;
-    private LocalDate to_date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_no")
     private Employee employee;
 
-    public int getEmp_no() { return emp_no; }
-    public void setEmp_no(int emp_no) { this.emp_no = emp_no; }
+    private int salary;
+
+    @Id private LocalDate from_date;
+
+    private LocalDate to_date;
+
+
+    public Employee getEmp_no() { return employee; }
+    public void setEmp_no(Employee employee) { this.employee = employee; }
     public int getSalary() { return salary; }
     public void setSalary(int salary) { this.salary = salary; }
     public LocalDate getFrom_date() { return from_date; }
@@ -28,7 +31,8 @@ public class Salaries {
 
     @Override
     public String toString() {
-        return "Employee [emp_no=" + emp_no  + ", salary=" + salary + ", from_date=" + from_date
+        return "Salary [emp_no=" + (employee != null ? employee.getEmp_no() : "N/A")
+                + ", salary=" + salary + ", from_date=" + from_date
                 + ", to_date=" + to_date + "]";
     }
 }

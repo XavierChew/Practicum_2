@@ -13,6 +13,21 @@ public class EmployeeService {
     public EmployeeService() {
         businessLogic = new BusinessLogic();
     }
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//
+//public class EmployeeService {
+//    private final EntityManagerFactory emf = BusinessLogic.getEntityManagerFactory();
+//
+//    EntityManager em = emf.createEntityManager();
+//    List<Employee> employee = new ArrayList<>();
+//
+//
+//    }
+//
+//    }
+
 
     @GET
     @Path("/ping")

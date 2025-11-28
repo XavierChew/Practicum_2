@@ -19,7 +19,7 @@ public class DepartmentManager {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "emp_no")
-    private Department employee;
+    private Employee employee;
 
     private LocalDate from_date;
     private LocalDate to_date;
