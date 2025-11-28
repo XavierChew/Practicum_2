@@ -1,3 +1,5 @@
+package Resources;
+
 import entities.Department;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

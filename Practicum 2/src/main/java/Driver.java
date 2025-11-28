@@ -1,7 +1,6 @@
+import Resources.DepartmentResource;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
-import services.DepartmentService;
-import services.EmployeeService;
 
 import java.util.HashSet;
 import java.util.Set;
