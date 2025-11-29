@@ -5,6 +5,10 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.Response;
+import entities.Employee;
+
 
 @Path("/employee")
 public class EmployeeService {
@@ -13,26 +17,18 @@ public class EmployeeService {
     public EmployeeService() {
         businessLogic = new BusinessLogic();
     }
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//
-//public class EmployeeService {
-//    private final EntityManagerFactory emf = BusinessLogic.getEntityManagerFactory();
-//
-//    EntityManager em = emf.createEntityManager();
-//    List<Employee> employee = new ArrayList<>();
-//
-//
-//    }
-//
-//    }
-
 
     @GET
     @Path("/ping")
     @Produces(MediaType.TEXT_PLAIN)
     public String ping() {
         return "pong";
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response find(@PathParam("id") int id) {
+        return Response.ok(businessLogic.findEmployee(id)).build();
     }
 }

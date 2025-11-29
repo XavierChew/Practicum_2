@@ -14,6 +14,7 @@ import services.DepartmentService;
  import java.util.HashMap;
  import java.util.Map;
  import java.util.ArrayList;
+ import entities.Employee;
 
  public class  BusinessLogic {
 
@@ -67,6 +68,15 @@ import services.DepartmentService;
         return departments;
     }
 
-
+    public Employee findEmployee(int id) {
+        // EntityManager em = emf.createEntityManager();
+        Employee employee = new Employee();
+        try {
+            employee = em.find(Employee.class, id);
+        } catch (Exception e) {
+            System.err.println("Error fetching employee: " + e.getMessage());
+        }
+        return employee;
+    }
  }
 
