@@ -1,43 +1,35 @@
 package entities;
 
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class DepartmentEmployeeId {
-    private int emp_no;
-    private String dept_no;
+public class DepartmentEmployeeId implements Serializable {
+
+    private int empNo;
+    private String deptNo;
 
     public DepartmentEmployeeId() {}
-    public DepartmentEmployeeId(int emp_no, String dept_no) {
-        this.emp_no = emp_no;
+
+    public DepartmentEmployeeId(int empNo, String deptNo) {
+        this.empNo = empNo;
+        this.deptNo = deptNo;
     }
 
-    // Getter and Setter
-    public int getEmp_no() {
-        return emp_no;
-    }
-
-    public void setEmp_no(int emp_no) {
-        this.emp_no = emp_no;
-    }
-
-    public String getDept_no() {
-        return dept_no;
-    }
-
-    public void setDept_no(String dept_no) {
-        this.dept_no = dept_no;
-    }
+    public int getEmpNo() { return empNo; }
+    public void setEmpNo(int empNo) { this.empNo = empNo; }
+    public String getDeptNo() { return deptNo; }
+    public void setDeptNo(String deptNo) { this.deptNo = deptNo; }
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) return true;
+        if (!(o instanceof DepartmentEmployeeId)) return false;
         DepartmentEmployeeId that = (DepartmentEmployeeId) o;
-        return emp_no == that.emp_no && Objects.equals(dept_no, that.dept_no);
+        return empNo == that.empNo && Objects.equals(deptNo, that.deptNo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(emp_no, dept_no);
+        return Objects.hash(empNo, deptNo);
     }
 }

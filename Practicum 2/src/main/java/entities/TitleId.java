@@ -6,32 +6,40 @@ import java.util.Objects;
 
 public class TitleId implements Serializable {
 
-    private Employee employee;
-
+    private int empNo;      // primitive PK
     private String title;
-
     private LocalDate fromDate;
 
     public TitleId() {}
 
-    public TitleId(Employee employee, String title, LocalDate fromDate) {
-        this.employee = employee;
+    public TitleId(int empNo, String title, LocalDate fromDate) {
+        this.empNo = empNo;
         this.title = title;
         this.fromDate = fromDate;
     }
+
+    // getters & setters
+    public int getEmpNo() { return empNo; }
+    public void setEmpNo(int empNo) { this.empNo = empNo; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public LocalDate getFromDate() { return fromDate; }
+    public void setFromDate(LocalDate fromDate) { this.fromDate = fromDate; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TitleId titleId = (TitleId) o;
-        return Objects.equals(employee, titleId.employee) &&
+        return empNo == titleId.empNo &&
                 Objects.equals(title, titleId.title) &&
                 Objects.equals(fromDate, titleId.fromDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employee, title, fromDate);
+        return Objects.hash(empNo, title, fromDate);
     }
 }

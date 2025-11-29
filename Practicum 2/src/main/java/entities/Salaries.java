@@ -1,38 +1,55 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@IdClass(SalaryId.class)
 @Table(name = "salaries")
 public class Salaries {
 
     @Id
+    @Column(name = "emp_no")
+    private int empNo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_no")
+    @JsonBackReference
     private Employee employee;
+
 
     private int salary;
 
-    @Id private LocalDate from_date;
+    @Id
+    @Column(name = "from_date")
+    private LocalDate fromDate;
 
-    private LocalDate to_date;
+    @Column(name = "to_date")
+    private LocalDate toDate;
 
 
-    public Employee getEmp_no() { return employee; }
-    public void setEmp_no(Employee employee) { this.employee = employee; }
+    public int getEmpNo() {return empNo;}
+    public void setEmpNo(int empNo) {this.empNo = empNo;}
+    public Employee getEmployee() { return employee; } // Corrected getter name (was getEmp_no)
+    public void setEmployee(Employee employee) { this.employee = employee; } // Corrected setter name (was setEmp_no)
     public int getSalary() { return salary; }
     public void setSalary(int salary) { this.salary = salary; }
-    public LocalDate getFrom_date() { return from_date; }
-    public void setFrom_date(LocalDate from_date) { this.from_date = from_date; }
-    public LocalDate getTo_date() { return to_date; }
-    public void setTo_date(LocalDate to_date) { this.to_date = to_date; }
+    public LocalDate getFromDate() { return fromDate; } // Corrected getter name
+    public void setFromDate(LocalDate fromDate) { this.fromDate = fromDate; } // Corrected setter name
+    public LocalDate getToDate() { return toDate; } // Corrected getter name
+    public void setToDate(LocalDate toDate) { this.toDate = toDate; } // Corrected setter name
 
     @Override
     public String toString() {
-        return "Salary [emp_no=" + (employee != null ? employee.getEmp_no() : "N/A")
-                + ", salary=" + salary + ", from_date=" + from_date
-                + ", to_date=" + to_date + "]";
+        return "Salaries{" +
+                "empNo=" + empNo +
+                ", employee=" + employee +
+                ", salary=" + salary +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                '}';
     }
 }

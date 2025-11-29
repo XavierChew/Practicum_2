@@ -1,70 +1,86 @@
 package entities;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
+@IdClass(DepartmentEmployeeId.class)
 @Table(name = "dept_emp")
 public class DepartmentEmployee {
-    @Id private int emp_no;
-    @Id private String dept_no;
-    private Date from_date;
-    private Date to_date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @Id
+    @Column(name = "emp_no")
+    private int empNo;
+
+    @Id
+    @Column(name = "dept_no")
+    private String deptNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_no")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Employee employee;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_no")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Department department;
 
+    @Column(name = "from_date")
+    private LocalDate fromDate;
+
+    @Column(name = "to_date")
+    private LocalDate toDate;
 
 
     public DepartmentEmployee() {
     }
 
-    public int getEmp_no() {
-        return emp_no;
+
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmp_no(int emp_no) {
-        this.emp_no = emp_no;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public String getDept_no() {
-        return dept_no;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDept_no(String dept_no) {
-        this.dept_no = dept_no;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public Date getFrom_date() {
-        return from_date;
+    public LocalDate getFromDate() { // Corrected getter name
+        return fromDate;
     }
 
-    public void setFrom_date(Date from_date) {
-        this.from_date = from_date;
+    public void setFromDate(LocalDate fromDate) { // Corrected setter name
+        this.fromDate = fromDate;
     }
 
-    public Date getTo_date() {
-        return to_date;
+    public LocalDate getToDate() { // Corrected getter name
+        return toDate;
     }
 
-    public void setTo_date(Date to_date) {
-        this.to_date = to_date;
+    public void setToDate(LocalDate toDate) { // Corrected setter name
+        this.toDate = toDate;
     }
 
     @Override
     public String toString() {
+        // Updated toString() to use camelCase getters from Department and local fields
         return "DepartmentEmployee{" +
-                "emp_no=" + emp_no +
-                ", dept_no='" + dept_no + '\'' +
-                ", from_date=" + from_date +
-                ", to_date=" + to_date +
+                "emp_no=" + employee.getEmp_no() +
+                ", dept_no='" + department.getDeptNo() + "'" + '\'' +
+                ", from_date=" + fromDate +
+                ", to_date=" + toDate +
                 '}';
     }
 }

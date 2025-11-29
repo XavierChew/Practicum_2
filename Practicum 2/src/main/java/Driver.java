@@ -13,6 +13,8 @@ public class Driver extends Application {
         Set<Class<?>> classes = new HashSet<>();
         classes.add(EmployeeService.class);
         classes.add(DepartmentService.class);
+        classes.add(ObjectMapperContextResolver.class);
+
         return classes;
     }
 }

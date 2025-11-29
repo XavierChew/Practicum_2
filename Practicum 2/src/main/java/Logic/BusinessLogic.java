@@ -1,5 +1,8 @@
 package Logic;
 
+ import entities.DepartmentEmployee;
+ import entities.DepartmentManager;
+ import entities.Employee;
  import jakarta.persistence.*;
  import services.EmployeeService;
 import entities.Department;
@@ -66,6 +69,35 @@ import services.DepartmentService;
         }
         return departments;
     }
+
+     public Employee findFullEmployeeRecord(int empNo) {
+         EntityManager em = emf.createEntityManager();
+         try {
+             Employee emp = em.find(Employee.class, empNo);
+             if (emp != null) {
+                 // Initialize collections
+                 emp.getTitleList().size();
+                 emp.getSalaryList().size();
+                 emp.getDeptEmpList().size();
+                 emp.getDeptManagerList().size();
+
+                 // Initialize nested lazy proxies
+                 for (DepartmentEmployee de : emp.getDeptEmpList()) {
+                     de.getDepartment().getDeptName(); // access at least one property
+                 }
+                 // Initialize nested Department in DepartmentManager
+                 for (DepartmentManager dm : emp.getDeptManagerList()) {
+                     dm.getDepartment().getDeptName(); // access a real property
+                 }
+             }
+             return emp;
+         } finally {
+             em.close();
+         }
+     }
+
+
+
 
 
  }
