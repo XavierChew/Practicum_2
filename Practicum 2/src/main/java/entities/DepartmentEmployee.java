@@ -1,5 +1,6 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -22,7 +23,7 @@ public class DepartmentEmployee {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_no")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonBackReference // avoids recursion
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)

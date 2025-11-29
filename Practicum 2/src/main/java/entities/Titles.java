@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class Titles {
     @Id
     @Column(name= "emp_no")
+    @JsonIgnore
     private int empNo;
 
     @ManyToOne(fetch = FetchType.LAZY)

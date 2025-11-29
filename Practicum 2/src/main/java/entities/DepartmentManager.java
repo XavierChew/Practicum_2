@@ -1,6 +1,8 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,11 +19,12 @@ public class DepartmentManager {
 
     @Id
     @Column(name = "emp_no")
+    @JsonIgnore
     private int empNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dept_no")
-    @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY)

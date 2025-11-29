@@ -13,6 +13,7 @@ public class Salaries {
 
     @Id
     @Column(name = "emp_no")
+    @JsonIgnore
     private int empNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
