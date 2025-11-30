@@ -17,6 +17,7 @@ import services.DepartmentService;
  import java.util.HashMap;
  import java.util.Map;
  import java.util.ArrayList;
+ import dto.EmployeeDTO;
 
  public class  BusinessLogic {
 
@@ -95,6 +96,30 @@ import services.DepartmentService;
              em.close();
          }
      }
+
+     public List<EmployeeDTO> findEmployeesByDepartment(String dept_no, int page) {
+        EntityManager em = emf.createEntityManager();
+        List<EmployeeDTO> employees = new ArrayList<>();
+        try {
+            employees = em.createQuery(
+                "SELECT new dto.EmployeeDTO(e.emp_no, e.first_name, e.last_name, e.hire_date) " +
+                "FROM Employee e " +
+                "JOIN e.deptEmpList de " +
+                "WHERE de.department.deptNo = :dept_no",
+                EmployeeDTO.class)
+                .setParameter("dept_no", dept_no)
+                .setFirstResult((page - 1) * 20)
+                .setMaxResults(20)
+                .getResultList();
+        } catch (Exception e) {
+            System.err.println("Error fetching employees by department: " + e.getMessage());
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return employees;
+    }
 
 
 
