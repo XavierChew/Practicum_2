@@ -53,7 +53,6 @@ public class EmployeeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response promotion(PromotionDTO employee) {
         if  (employee == null) {
-            System.out.println("employee is null");
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("No employee input.").build();
         }

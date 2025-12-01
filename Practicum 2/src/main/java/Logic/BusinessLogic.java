@@ -131,36 +131,39 @@ import services.DepartmentService;
      public Response promoteEmployee(PromotionDTO promotion) {
          EntityManager em = emf.createEntityManager();
          em.getTransaction().begin();
-
+         LocalDate toPresentDate = LocalDate.of(9999, 1, 1);
          try {
-//             Employee employee = em.find(Employee.class, promotion.getEmpNo());
-             if (promotion == null) {
-                 System.out.println("promotion is null");
+             System.out.println("emp ID: " + promotion.getEmpNo());
+             Employee employee = em.find(Employee.class, promotion.getEmpNo());
+             if (employee == null) {
                  return Response.status(Response.Status.NOT_FOUND)
-                         .entity("No employee found").build();
+                         .entity("No employee record for ID" + promotion.getEmpNo()).build();
              }
              em.createNamedQuery("Titles.updateTitleDate")
                      .setParameter("toDate", LocalDate.now())
-                     .setParameter("empNo", promotion.getEmpNo())
+                     .setParameter("emp_no", promotion.getEmpNo())
+                     .setParameter("date", toPresentDate)
                      .executeUpdate();
              Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
              em.persist(title);
 
              em.createNamedQuery("Salaries.updateSalaryDate")
                      .setParameter("toDate", LocalDate.now())
-                     .setParameter("empNo", promotion.getEmpNo())
+                     .setParameter("emp_no", promotion.getEmpNo())
+                     .setParameter("date", toPresentDate)
                      .executeUpdate();
              Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
              em.persist(salary);
 
              em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
                      .setParameter("toDate", LocalDate.now())
-                     .setParameter("empNo", promotion.getEmpNo())
+                     .setParameter("emp_no", promotion.getEmpNo())
+                     .setParameter("date", toPresentDate)
                      .executeUpdate();
              DepartmentEmployee deptEmp = new DepartmentEmployee(promotion.getEmpNo(), promotion.getDepartmentID(), LocalDate.now());
              em.persist(deptEmp);
 
-             if (promotion.getTitle().equals("Manager")) {
+             if (promotion.getTitle().equals("manager")) {
                  DepartmentManager deptManager = new DepartmentManager(promotion.getDepartmentID(), promotion.getEmpNo(), LocalDate.now());
                  em.persist(deptManager);
              }
