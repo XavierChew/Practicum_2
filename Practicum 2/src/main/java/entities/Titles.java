@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "titles")
 @IdClass(TitleId.class)
+@NamedQuery(name = "Titles.updateTitleDate", 
+query = "UPDATE Titles t SET t.toDate = :toDate WHERE t.empNo = :emp_no AND t.toDate = :date")
 public class Titles {
     @Id
     @Column(name= "emp_no")
@@ -32,6 +34,13 @@ public class Titles {
     private LocalDate toDate;
 
     public Titles(){}
+
+    public Titles(int empNo, String title, LocalDate fromDate) {
+        this.empNo = empNo;
+        this.title = title;
+        this.fromDate = fromDate;
+        this.toDate = LocalDate.MAX;
+    }
 
     // getters and setters
     public int getEmpNo() { return empNo; }

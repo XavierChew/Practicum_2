@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @Entity
 @IdClass(SalaryId.class)
 @Table(name = "salaries")
+@NamedQuery(name = "Salaries.updateSalaryDate", 
+query = "UPDATE Salaries s SET s.toDate = :toDate WHERE s.empNo = :emp_no AND s.toDate = :date")
 public class Salaries {
 
     @Id
@@ -30,6 +32,15 @@ public class Salaries {
 
     @Column(name = "to_date")
     private LocalDate toDate;
+
+    public Salaries() {};
+
+    public Salaries(int empNo, int salary, LocalDate fromDate) {
+        this.empNo = empNo;
+        this.salary = salary;
+        this.fromDate = fromDate;
+        this.toDate = LocalDate.MAX;
+    }
 
 
     public int getEmpNo() {return empNo;}

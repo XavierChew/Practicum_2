@@ -18,6 +18,13 @@ import services.DepartmentService;
  import java.util.Map;
  import java.util.ArrayList;
  import dto.EmployeeDTO;
+ import dto.PromotionDTO;
+ import jakarta.ws.rs.core.Response;
+ import entities.Titles;
+ import java.time.LocalDate;
+ import entities.Salaries;
+ import entities.DepartmentEmployee;
+ import entities.DepartmentManager;
 
  public class  BusinessLogic {
 
@@ -26,7 +33,7 @@ import services.DepartmentService;
      @PersistenceContext
      private static EntityManager em = null;
 
-     public BusinessLogic(){
+     public BusinessLogic() {
          emf = getEntityManagerFactory();
          em = emf.createEntityManager();
      }
@@ -38,7 +45,7 @@ import services.DepartmentService;
              persistenceMap.put("jakarta.persistence.jdbc.url",
                      "jdbc:mariadb://localhost:3306/" + DBNAME);
              try {
-                 emf =  Persistence.createEntityManagerFactory("EmployeeService", persistenceMap);
+                 emf = Persistence.createEntityManagerFactory("EmployeeService", persistenceMap);
 
              } catch (Exception e) {
                  throw new RuntimeException(e);
@@ -47,29 +54,29 @@ import services.DepartmentService;
          return emf;
      }
 
-     public static void closeEntityManagerFactory () {
+     public static void closeEntityManagerFactory() {
          if (emf != null && emf.isOpen()) {
              emf.close();
              emf = null;
          }
      }
 
-     public List<Department> findAllDepartment(){
-        EntityManager em = emf.createEntityManager();
-        List<Department> departments = new ArrayList<>();
+     public List<Department> findAllDepartment() {
+         EntityManager em = emf.createEntityManager();
+         List<Department> departments = new ArrayList<>();
 
-        try {
-           departments =  em.createQuery("SELECT d from Department d", Department.class).getResultList();
+         try {
+             departments = em.createQuery("SELECT d from Department d", Department.class).getResultList();
 
-        } catch (Exception e) {
-            System.err.println("Error fetching all departments: " + e.getMessage());
-        } finally {
-            if (em.isOpen()) {
-                em.close();
-            }
-        }
-        return departments;
-    }
+         } catch (Exception e) {
+             System.err.println("Error fetching all departments: " + e.getMessage());
+         } finally {
+             if (em.isOpen()) {
+                 em.close();
+             }
+         }
+         return departments;
+     }
 
      public Employee findFullEmployeeRecord(int empNo) {
          EntityManager em = emf.createEntityManager();
@@ -98,32 +105,78 @@ import services.DepartmentService;
      }
 
      public List<EmployeeDTO> findEmployeesByDepartment(String dept_no, int page) {
-        EntityManager em = emf.createEntityManager();
-        List<EmployeeDTO> employees = new ArrayList<>();
-        try {
-            employees = em.createQuery(
-                "SELECT new dto.EmployeeDTO(e.emp_no, e.first_name, e.last_name, e.hire_date) " +
-                "FROM Employee e " +
-                "JOIN e.deptEmpList de " +
-                "WHERE de.department.deptNo = :dept_no",
-                EmployeeDTO.class)
-                .setParameter("dept_no", dept_no)
-                .setFirstResult((page - 1) * 20)
-                .setMaxResults(20)
-                .getResultList();
-        } catch (Exception e) {
-            System.err.println("Error fetching employees by department: " + e.getMessage());
-        } finally {
-            if (em.isOpen()) {
-                em.close();
-            }
-        }
-        return employees;
-    }
+         EntityManager em = emf.createEntityManager();
+         List<EmployeeDTO> employees = new ArrayList<>();
+         try {
+             employees = em.createQuery(
+                             "SELECT new dto.EmployeeDTO(e.emp_no, e.first_name, e.last_name, e.hire_date) " +
+                                     "FROM Employee e " +
+                                     "JOIN e.deptEmpList de " +
+                                     "WHERE de.department.deptNo = :dept_no",
+                             EmployeeDTO.class)
+                     .setParameter("dept_no", dept_no)
+                     .setFirstResult((page - 1) * 20)
+                     .setMaxResults(20)
+                     .getResultList();
+         } catch (Exception e) {
+             System.err.println("Error fetching employees by department: " + e.getMessage());
+         } finally {
+             if (em.isOpen()) {
+                 em.close();
+             }
+         }
+         return employees;
+     }
 
+     public Response promoteEmployee(PromotionDTO promotion) {
+         EntityManager em = emf.createEntityManager();
+         em.getTransaction().begin();
 
+         try {
+//             Employee employee = em.find(Employee.class, promotion.getEmpNo());
+             if (promotion == null) {
+                 System.out.println("promotion is null");
+                 return Response.status(Response.Status.NOT_FOUND)
+                         .entity("No employee found").build();
+             }
+             em.createNamedQuery("Titles.updateTitleDate")
+                     .setParameter("toDate", LocalDate.now())
+                     .setParameter("empNo", promotion.getEmpNo())
+                     .executeUpdate();
+             Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
+             em.persist(title);
 
+             em.createNamedQuery("Salaries.updateSalaryDate")
+                     .setParameter("toDate", LocalDate.now())
+                     .setParameter("empNo", promotion.getEmpNo())
+                     .executeUpdate();
+             Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
+             em.persist(salary);
 
+             em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
+                     .setParameter("toDate", LocalDate.now())
+                     .setParameter("empNo", promotion.getEmpNo())
+                     .executeUpdate();
+             DepartmentEmployee deptEmp = new DepartmentEmployee(promotion.getEmpNo(), promotion.getDepartmentID(), LocalDate.now());
+             em.persist(deptEmp);
 
+             if (promotion.getTitle().equals("Manager")) {
+                 DepartmentManager deptManager = new DepartmentManager(promotion.getDepartmentID(), promotion.getEmpNo(), LocalDate.now());
+                 em.persist(deptManager);
+             }
+
+             em.getTransaction().commit();
+
+             return Response.status(Response.Status.OK)
+                     .entity("Employee with emp_no " + promotion.getEmpNo() + " promoted to " + promotion.getTitle() + ".")
+                     .build();
+         } catch (Exception e) {
+             em.getTransaction().rollback();
+             throw new RuntimeException("Error promoting employee: " + e.getMessage());
+         } finally {
+             if (em.isOpen())
+                 em.close();
+         }
+     }
  }
 

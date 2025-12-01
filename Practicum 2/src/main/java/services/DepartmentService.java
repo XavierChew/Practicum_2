@@ -5,14 +5,9 @@ import entities.Department;
 import entities.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.DefaultValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +24,7 @@ public class DepartmentService {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllDepartments(){
+    public Response getAllDepartments() {
         List<Department> departments = businessLogic.findAllDepartment();
 
         if (departments.isEmpty()) {
@@ -48,11 +43,11 @@ public class DepartmentService {
     @Path("/{dept_no}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesByDepartment(@PathParam("dept_no") String dept_no, @QueryParam("page") @DefaultValue("1") int page) {
-        
+
         if (page < 1) {
             return Response.status(Response.Status.BAD_REQUEST)
-                .entity("Page number must be greater than 0")
-                .build();
+                    .entity("Page number must be greater than 0")
+                    .build();
         }
         return Response.ok(businessLogic.findEmployeesByDepartment(dept_no, page)).build();
         // return Response.status(Response.Status.OK)

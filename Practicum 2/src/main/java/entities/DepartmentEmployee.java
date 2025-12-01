@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @Entity
 @IdClass(DepartmentEmployeeId.class)
 @Table(name = "dept_emp")
+@NamedQuery(name = "DepartmentEmployee.updateDepartmentDate", 
+query = "UPDATE DepartmentEmployee de SET de.toDate = :toDate WHERE de.empNo = :emp_no AND de.toDate = :date")
 public class DepartmentEmployee {
 
     @Id
@@ -41,6 +43,13 @@ public class DepartmentEmployee {
     public DepartmentEmployee() {
     }
 
+    public DepartmentEmployee(int empNo, String deptNo, LocalDate fromDate) {
+        this.empNo = empNo;
+        this.deptNo = deptNo;
+        this.fromDate = fromDate;
+        this.toDate = LocalDate.MAX;
+    }
+
 
     public Employee getEmployee() {
         return employee;
@@ -48,6 +57,14 @@ public class DepartmentEmployee {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public String getDeptNo() {
+        return deptNo;
+    }
+
+    public void setDeptNo(String deptNo) {
+        this.deptNo = deptNo;
     }
 
     public Department getDepartment() {

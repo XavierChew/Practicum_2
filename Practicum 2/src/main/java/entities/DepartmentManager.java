@@ -43,6 +43,13 @@ public class DepartmentManager {
 
     public DepartmentManager() {}
 
+    public DepartmentManager(String deptNo, int empNo, LocalDate fromDate) {
+        this.deptNo = deptNo;
+        this.empNo = empNo;
+        this.fromDate = fromDate;
+        this.toDate = LocalDate.MAX;
+    }
+
     public Department getDepartment() {
         return department;
     }

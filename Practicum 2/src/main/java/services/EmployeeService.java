@@ -1,11 +1,9 @@
 package services;
 
 import Logic.BusinessLogic;
+import dto.PromotionDTO;
 import entities.Employee;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -47,5 +45,18 @@ public class EmployeeService {
     @Produces(MediaType.TEXT_PLAIN)
     public String ping() {
         return "pong";
+    }
+
+    @POST
+    @Path("/promotion")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response promotion(PromotionDTO employee) {
+        if  (employee == null) {
+            System.out.println("employee is null");
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("No employee input.").build();
+        }
+        return Response.ok(businessLogic.promoteEmployee(employee)).build();
     }
 }
