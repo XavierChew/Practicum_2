@@ -30,18 +30,22 @@ public class Employee {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @JsonManagedReference
+    @OrderBy("toDate ASC")
     private List<Titles> titleList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @JsonManagedReference
+    @OrderBy("toDate ASC")
     private List<Salaries> salaryList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @JsonManagedReference
+    @OrderBy("toDate ASC")
     private List<DepartmentEmployee> deptEmpList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     @JsonManagedReference
+    @OrderBy("toDate ASC")
     private List<DepartmentManager> deptManagerList;
 
     public Employee() {}

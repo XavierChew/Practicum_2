@@ -130,7 +130,6 @@ import java.util.List;
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
-             Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
              if (promotion.getTitle() != null) {
              System.out.println("Title update:");
                  em.createNamedQuery("Titles.updateTitleDate")
@@ -138,8 +137,9 @@ import java.util.List;
                          .setParameter("emp_no", promotion.getEmpNo())
                          .setParameter("date", toPresentDate)
                          .executeUpdate();
-                 em.persist(title);
              }
+                Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
+                em.persist(title);
              if (promotion.getSalary() != 0) {
                  System.out.println("Salary update:");
                  em.createNamedQuery("Salaries.updateSalaryDate")
