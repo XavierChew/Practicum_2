@@ -10,8 +10,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "titles")
 @IdClass(TitleId.class)
-@NamedQuery(name = "Titles.updateTitleDate", 
-query = "UPDATE Titles t SET t.toDate = :toDate WHERE t.empNo = :emp_no AND t.toDate = :date")
+@NamedQueries({
+        @NamedQuery(name = "Titles.updateTitleDate", query = "UPDATE Titles t SET t.toDate = :toDate WHERE t.empNo = :emp_no AND t.toDate = :date"),
+        @NamedQuery(name = "Titles.findLatestTitle", query = "SELECT t from Titles t WHERE t.empNo = :emp_no AND t.toDate = :date")
+})
 public class Titles {
     @Id
     @Column(name= "emp_no")

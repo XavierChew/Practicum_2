@@ -15,8 +15,10 @@ import java.time.LocalDate;
 @Entity
 @IdClass(DepartmentEmployeeId.class)
 @Table(name = "dept_emp")
-@NamedQuery(name = "DepartmentEmployee.updateDepartmentDate", 
-query = "UPDATE DepartmentEmployee de SET de.toDate = :toDate WHERE de.empNo = :emp_no AND de.toDate = :date")
+@NamedQueries({
+        @NamedQuery(name = "DepartmentEmployee.updateDepartmentDate", query = "UPDATE DepartmentEmployee de SET de.toDate = :toDate WHERE de.empNo = :emp_no AND de.toDate = :date"),
+        @NamedQuery(name = "DepartmentEmployee.getLatestDepartment", query = "SELECT de FROM DepartmentEmployee de WHERE de.empNo = :emp_no AND de.toDate = :date")
+})
 public class DepartmentEmployee {
 
     @Id
