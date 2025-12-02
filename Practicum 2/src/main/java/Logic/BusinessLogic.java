@@ -162,6 +162,10 @@ import java.util.List;
              }
 
              if (promotion.getTitle().toLowerCase().equals("manager")) {
+                 if (promotion.getDepartmentID() == null) {
+                     System.out.println("dept id: "+ employee.getDeptEmpList().get(0).getDeptNo());
+                     promotion.setDepartmentID(employee.getDeptEmpList().get(0).getDeptNo());
+                 }
                  DepartmentManager deptManager = new DepartmentManager(promotion.getDepartmentID(), promotion.getEmpNo(), LocalDate.now());
                  em.persist(deptManager);
              }
