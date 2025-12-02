@@ -130,34 +130,38 @@ import java.util.List;
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
-             System.out.println("Title update:");
-             em.createNamedQuery("Titles.updateTitleDate")
-                     .setParameter("toDate", LocalDate.now())
-                     .setParameter("emp_no", promotion.getEmpNo())
-                     .setParameter("date", toPresentDate)
-                     .executeUpdate();
              Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
-             em.persist(title);
+             if (promotion.getTitle() != null) {
+             System.out.println("Title update:");
+                 em.createNamedQuery("Titles.updateTitleDate")
+                         .setParameter("toDate", LocalDate.now())
+                         .setParameter("emp_no", promotion.getEmpNo())
+                         .setParameter("date", toPresentDate)
+                         .executeUpdate();
+                 em.persist(title);
+             }
+             if (promotion.getSalary() != 0) {
+                 System.out.println("Salary update:");
+                 em.createNamedQuery("Salaries.updateSalaryDate")
+                         .setParameter("toDate", LocalDate.now())
+                         .setParameter("emp_no", promotion.getEmpNo())
+                         .setParameter("date", toPresentDate)
+                         .executeUpdate();
+                 Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
+                 em.persist(salary);
+             }
+             if (promotion.getDepartmentID() != null) {
+                 System.out.println("Department update:");
+                 em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
+                         .setParameter("toDate", LocalDate.now())
+                         .setParameter("emp_no", promotion.getEmpNo())
+                         .setParameter("date", toPresentDate)
+                         .executeUpdate();
+                 DepartmentEmployee deptEmp = new DepartmentEmployee(promotion.getEmpNo(), promotion.getDepartmentID(), LocalDate.now());
+                 em.persist(deptEmp);
+             }
 
-             System.out.println("Salary update:");
-             em.createNamedQuery("Salaries.updateSalaryDate")
-                     .setParameter("toDate", LocalDate.now())
-                     .setParameter("emp_no", promotion.getEmpNo())
-                     .setParameter("date", toPresentDate)
-                     .executeUpdate();
-             Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
-             em.persist(salary);
-
-             System.out.println("Department update:");
-             em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
-                     .setParameter("toDate", LocalDate.now())
-                     .setParameter("emp_no", promotion.getEmpNo())
-                     .setParameter("date", toPresentDate)
-                     .executeUpdate();
-             DepartmentEmployee deptEmp = new DepartmentEmployee(promotion.getEmpNo(), promotion.getDepartmentID(), LocalDate.now());
-             em.persist(deptEmp);
-
-             if (promotion.getTitle().equals("manager")) {
+             if (promotion.getTitle().toLowerCase().equals("manager")) {
                  DepartmentManager deptManager = new DepartmentManager(promotion.getDepartmentID(), promotion.getEmpNo(), LocalDate.now());
                  em.persist(deptManager);
              }

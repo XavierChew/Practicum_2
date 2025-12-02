@@ -28,7 +28,7 @@ public class DepartmentManager {
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_no")
+    @JoinColumn(name = "emp_no", insertable = false, updatable = false)
     @JsonBackReference
     private Employee employee;
 
