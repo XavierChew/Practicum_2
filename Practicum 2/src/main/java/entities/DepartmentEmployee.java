@@ -1,13 +1,17 @@
 package entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-
+/**
+ * DepartmentEmployee is an entity that represents a department employee in the database.
+ * It is used to store information about a department employee.
+ * It is persisted to the database.
+ * @author: Ilyas & Wei Xian
+ */
 @Entity
 @IdClass(DepartmentEmployeeId.class)
 @Table(name = "dept_emp")

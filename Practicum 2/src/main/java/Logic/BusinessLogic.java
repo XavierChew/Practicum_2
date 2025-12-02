@@ -4,16 +4,9 @@ package Logic;
  import entities.DepartmentManager;
  import entities.Employee;
  import jakarta.persistence.*;
- import services.EmployeeService;
 import entities.Department;
 import jakarta.persistence.EntityManager;
- import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import services.EmployeeService;
-import services.DepartmentService;
  import java.util.HashMap;
  import java.util.Map;
  import java.util.ArrayList;
@@ -23,8 +16,6 @@ import services.DepartmentService;
  import entities.Titles;
  import java.time.LocalDate;
  import entities.Salaries;
- import entities.DepartmentEmployee;
- import entities.DepartmentManager;
 
  public class  BusinessLogic {
 
@@ -146,7 +137,6 @@ import services.DepartmentService;
                      .setParameter("date", toPresentDate)
                      .executeUpdate();
              Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
-             System.out.println("TITLE:" + title.toString());
              em.persist(title);
 
              System.out.println("Salary update:");

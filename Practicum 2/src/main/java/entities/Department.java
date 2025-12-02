@@ -4,6 +4,12 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
+/**
+ * Department is an entity that represents a department in the database.
+ * It is used to store information about a department.
+ * It is persisted to the database.
+ * @author: Ilyas & Wei Xian
+ */
 @Entity
 @Table(name = "departments")
 public class Department {
