@@ -56,6 +56,6 @@ public class EmployeeService {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("No employee input.").build();
         }
-        return Response.ok(businessLogic.promoteEmployee(employee)).build();
+        return businessLogic.promoteEmployee(employee);
     }
 }

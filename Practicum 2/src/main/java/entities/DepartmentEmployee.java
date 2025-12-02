@@ -24,12 +24,12 @@ public class DepartmentEmployee {
     private String deptNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_no")
+    @JoinColumn(name = "emp_no", insertable = false, updatable = false)
     @JsonBackReference // avoids recursion
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dept_no")
+    @JoinColumn(name = "dept_no", insertable = false, updatable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Department department;
 
@@ -47,7 +47,7 @@ public class DepartmentEmployee {
         this.empNo = empNo;
         this.deptNo = deptNo;
         this.fromDate = fromDate;
-        this.toDate = LocalDate.MAX;
+        this.toDate = LocalDate.of(9999, 1, 1);
     }
 
 

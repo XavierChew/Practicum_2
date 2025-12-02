@@ -132,21 +132,24 @@ import services.DepartmentService;
          EntityManager em = emf.createEntityManager();
          em.getTransaction().begin();
          LocalDate toPresentDate = LocalDate.of(9999, 1, 1);
+         System.out.println(promotion.toString());
          try {
-             System.out.println("emp ID: " + promotion.getEmpNo());
              Employee employee = em.find(Employee.class, promotion.getEmpNo());
              if (employee == null) {
                  return Response.status(Response.Status.NOT_FOUND)
-                         .entity("No employee record for ID" + promotion.getEmpNo()).build();
+                         .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
+             System.out.println("Title update:");
              em.createNamedQuery("Titles.updateTitleDate")
                      .setParameter("toDate", LocalDate.now())
                      .setParameter("emp_no", promotion.getEmpNo())
                      .setParameter("date", toPresentDate)
                      .executeUpdate();
              Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
+             System.out.println("TITLE:" + title.toString());
              em.persist(title);
 
+             System.out.println("Salary update:");
              em.createNamedQuery("Salaries.updateSalaryDate")
                      .setParameter("toDate", LocalDate.now())
                      .setParameter("emp_no", promotion.getEmpNo())
@@ -155,6 +158,7 @@ import services.DepartmentService;
              Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
              em.persist(salary);
 
+             System.out.println("Department update:");
              em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
                      .setParameter("toDate", LocalDate.now())
                      .setParameter("emp_no", promotion.getEmpNo())

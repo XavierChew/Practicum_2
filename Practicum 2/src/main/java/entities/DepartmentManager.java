@@ -23,7 +23,7 @@ public class DepartmentManager {
     private int empNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dept_no")
+    @JoinColumn(name = "dept_no", insertable = false, updatable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Department department;
 
@@ -47,7 +47,7 @@ public class DepartmentManager {
         this.deptNo = deptNo;
         this.empNo = empNo;
         this.fromDate = fromDate;
-        this.toDate = LocalDate.MAX;
+        this.toDate = LocalDate.of(9999, 1, 1);
     }
 
     public Department getDepartment() {

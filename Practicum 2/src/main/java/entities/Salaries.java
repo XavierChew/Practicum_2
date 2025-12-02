@@ -19,7 +19,7 @@ public class Salaries {
     private int empNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emp_no")
+    @JoinColumn(name = "emp_no", insertable = false, updatable = false)
     @JsonBackReference
     private Employee employee;
 
@@ -39,7 +39,7 @@ public class Salaries {
         this.empNo = empNo;
         this.salary = salary;
         this.fromDate = fromDate;
-        this.toDate = LocalDate.MAX;
+        this.toDate = LocalDate.of(9999, 1, 1);
     }
 
 

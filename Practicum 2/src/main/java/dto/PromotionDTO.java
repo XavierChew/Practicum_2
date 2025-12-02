@@ -47,6 +47,10 @@ public class PromotionDTO  {
         this.empNo = empNo;
     }
 
+    @Override
+    public String toString() {
+        return "promotion: " +empNo + "\t" + salary + "\t" + departmentID + "\t" + title;
+    }
 
 
 }
