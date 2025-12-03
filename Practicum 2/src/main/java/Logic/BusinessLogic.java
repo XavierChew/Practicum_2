@@ -23,7 +23,7 @@ package Logic;
   * It is responsible for the data access of the employee service.
   * It is responsible for the validation of the employee service.
   * It is responsible for the promotion of the employee service.
-  * @author: Ilyas & Wei Xian
+  * @author Ilyas & Wei Xian
   */
  public class  BusinessLogic {
 

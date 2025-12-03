@@ -5,7 +5,7 @@ package dto;
  * It is used to transfer data between the client and the server.
  * It is not an entity itself, but it is used to transfer data between the client and the server.
  * It is not persisted to the database.
- * @author: Ilyas & Wei Xian
+ * @author Ilyas & Wei Xian
  */
 public class PromotionDTO  {
     public int empNo;
