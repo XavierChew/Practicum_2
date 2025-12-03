@@ -40,15 +40,31 @@ public class DepartmentService {
     //     retrieve the data. Note that in terms of computing, page numbers start from to
     //     but from the users point of view, pages start from to .
     @GET
-    @Path("/{dept_no}")
+    @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmployeesByDepartment(@PathParam("dept_no") String dept_no, @QueryParam("page") @DefaultValue("1") int page) {
+    public Response getEmployeesByDepartment(@QueryParam("dept_no") @DefaultValue("") String dept_no, @QueryParam("page") @DefaultValue("1") int page) {
 
         if (page < 1) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Page number must be greater than 0")
                     .build();
         }
+        if (dept_no == null || dept_no.isEmpty()) {
+            return Response.ok("No input for department number").build();
+        }
+        List<Department> departments;
+        departments = businessLogic.findAllDepartment();
+        boolean validDept = false;
+        for (Department department : departments) {
+            if (department.getDeptNo().equals(dept_no)) {
+                validDept = true;
+                break;
+            }
+        }
+        if (!validDept){
+            return Response.status(Response.Status.NOT_FOUND).entity("Invalid department number").build();
+        }
+
         return Response.ok(businessLogic.findEmployeesByDepartment(dept_no, page)).build();
         // return Response.status(Response.Status.OK)
         //     .entity("Page number: " + page)
