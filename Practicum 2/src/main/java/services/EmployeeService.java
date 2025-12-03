@@ -21,7 +21,7 @@ public class EmployeeService {
     public Response getFullEmployeeRecord(@QueryParam("emp_no") int emp_no) {
 
         // Validate input
-        if ( emp_no <= 0) {
+        if (emp_no <= 0) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Employee number must be a positive integer.")
                     .build();

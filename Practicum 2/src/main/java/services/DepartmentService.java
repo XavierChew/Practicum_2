@@ -2,14 +2,9 @@ package services;
 
 import Logic.BusinessLogic;
 import entities.Department;
-import entities.Employee;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
