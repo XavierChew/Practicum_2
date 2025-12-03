@@ -22,7 +22,7 @@ import java.util.List;
   * <p>
   * It handles the business logic, data access, and validation of the employee service.
   * </p>
-  * @author: Ilyas & Wei Xian
+  * @author Ilyas & Wei Xian
   */
  public class  BusinessLogic {
 
@@ -54,16 +54,6 @@ import java.util.List;
              }
          }
          return emf;
-     }
-
-     /**
-      * closeEntityManagerFactory method is used to close the {@link EntityManagerFactory} object.
-      */
-     public static void closeEntityManagerFactory() {
-         if (emf != null && emf.isOpen()) {
-             emf.close();
-             emf = null;
-         }
      }
 
      /**

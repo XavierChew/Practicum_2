@@ -1,6 +1,7 @@
 package services;
 
 import Logic.BusinessLogic;
+import dto.EmployeeDTO;
 import entities.Department;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

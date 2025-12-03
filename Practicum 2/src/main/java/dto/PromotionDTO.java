@@ -34,31 +34,18 @@ public class PromotionDTO  {
      */
     public String title;
 
-<<<<<<< HEAD
-    /** 
-     * Default constructor for creating a new PromotionDTO object.
-=======
     /**
      * Default public constructor.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public PromotionDTO() {}
 
     /**
-<<<<<<< HEAD
-     * Constructor for creating a new PromotionDTO object.
-     * @param employeeID The employee number.
-     * @param salary The salary of the employee.
-     * @param departmentID The department number.
-     * @param title The title of the employee.
-=======
-     * Parameterized constructor for creating a {@code PromotionDTO} instance.
+     * Parameterized constructor for creating a new PromotionDTO object.
      *
      * @param employeeID The employee number.
-     * @param salary The new salary amount.
-     * @param departmentID The new department ID.
-     * @param title The new title.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * @param salary The **new** salary of the employee.
+     * @param departmentID The **new** department ID.
+     * @param title The **new** title of the employee.
      */
     public PromotionDTO(int employeeID, int salary, String departmentID, String title) {
         this.empNo = employeeID;
@@ -68,118 +55,73 @@ public class PromotionDTO  {
     }
 
     /**
-<<<<<<< HEAD
-     * Retrieves the title of the employee.
-     * @return The title of the employee.
-=======
-     * Retrieves the new title.
-     * @return The job title string.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * Retrieves the new title of the employee.
+     * @return The new title of the employee.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the title of the employee.
-     * @param title The title of the employee to set.
-=======
-     * Sets the new title.
-     * @param title The title string to set.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * Sets the new title of the employee.
+     * @param title The new title of the employee to set.
      */
     public void setTitle(String title) {
         this.title = title;
     }
 
     /**
-<<<<<<< HEAD
-     * Retrieves the department number of the employee.
-     * @return The department number of the employee.
-=======
      * Retrieves the new department ID.
-     * @return The department ID string.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * @return The new department ID string.
      */
     public String getDepartmentID() {
         return departmentID;
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the department number of the employee.
-     * @param departmentID The department number of the employee to set.
-=======
      * Sets the new department ID.
-     * @param departmentID The department ID string to set.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * @param departmentID The new department ID string to set.
      */
     public void setDepartmentID(String departmentID) {
         this.departmentID = departmentID;
     }
 
     /**
-<<<<<<< HEAD
-     * Retrieves the salary of the employee.
-     * @return The salary of the employee.
-=======
      * Retrieves the new salary amount.
-     * @return The salary amount.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * @return The new salary amount.
      */
     public int getSalary() {
         return salary;
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the salary of the employee.
-     * @param salary The salary of the employee to set.
-=======
      * Sets the new salary amount.
-     * @param salary The salary amount to set.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
+     * @param salary The new salary amount to set.
      */
     public void setSalary(int salary) {
         this.salary = salary;
     }
 
     /**
-<<<<<<< HEAD
-     * Retrieves the employee number of the employee.
-     * @return The employee number of the employee.
-=======
      * Retrieves the employee number.
      * @return The employee number.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public int getEmpNo() {
         return empNo;
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the employee number of the employee.
-     * @param empNo The employee number of the employee to set.
-=======
      * Sets the employee number.
      * @param empNo The employee number to set.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public void setEmpNo(int empNo) {
         this.empNo = empNo;
     }
 
     /**
-<<<<<<< HEAD
-     * Returns a string representation of the {@link PromotionDTO} object.
-     * @return A string representation of the PromotionDTO object.
-=======
      * Returns a string representation of the {@code PromotionDTO} object.
      *
      * @return A formatted string showing the promotion details.
->>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     @Override
     public String toString() {
