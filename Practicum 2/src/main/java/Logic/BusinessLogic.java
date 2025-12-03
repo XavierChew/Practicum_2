@@ -4,9 +4,9 @@ package Logic;
  import entities.DepartmentManager;
  import entities.Employee;
  import jakarta.persistence.*;
-import entities.Department;
-import jakarta.persistence.EntityManager;
-import java.util.List;
+ import entities.Department;
+ import jakarta.persistence.EntityManager;
+ import java.util.List;
  import java.util.HashMap;
  import java.util.Map;
  import java.util.ArrayList;
@@ -55,16 +55,6 @@ import java.util.List;
              }
          }
          return emf;
-     }
-
-     /**
-      * closeEntityManagerFactory method is used to close the entity manager factory.
-      */
-     public static void closeEntityManagerFactory() {
-         if (emf != null && emf.isOpen()) {
-             emf.close();
-             emf = null;
-         }
      }
 
      /**
@@ -121,8 +111,8 @@ import java.util.List;
 
      /**
       * findEmployeesByDepartment method is used to find employees by department.
-      * @param dept_no
-      * @param page
+      * @param dept_no  The unique identifier of the department.
+      * @param page Page number
       * @return List<EmployeeDTO>
       */
      public List<EmployeeDTO> findEmployeesByDepartment(String dept_no, int page) {
@@ -151,7 +141,7 @@ import java.util.List;
 
      /**
       * promoteEmployee method is used to promote an employee.
-      * @param promotion
+      * @param promotion Promotion DTO
       * @return Response
       */
      public Response promoteEmployee(PromotionDTO promotion) {
