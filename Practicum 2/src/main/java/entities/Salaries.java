@@ -7,15 +7,15 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 /**
- * **Salaries** is a JPA entity that represents an employee's salary record for a specific period.
+ * Salaries is a JPA entity that represents an employee's salary record for a specific period.
  *
- * * It is mapped to the **"salaries"** table and uses a composite primary key defined by {@link SalaryId}.
- * * This entity allows for tracking the historical changes in an employee's compensation over time.
+ * It is mapped to the "salaries" table and uses a composite primary key defined by {@link SalaryId}.
+ * This entity allows for tracking the historical changes in an employee's compensation over time.
  *
  * ## Named Queries
  * The following named queries are defined for efficient data access:
- * 1.  **{@code Salaries.updateSalaryDate}**: Updates the {@code toDate} for a specific employee's salary record.
- * 2.  **{@code Salaries.findLatestSalary}**: Retrieves the current (latest) salary record for a specific employee by checking for a maximum {@code toDate} value (often '9999-01-01').
+ * 1.  {@code Salaries.updateSalaryDate}: Updates the {@code toDate} for a specific employee's salary record.
+ * 2.  {@code Salaries.findLatestSalary}: Retrieves the current (latest) salary record for a specific employee by checking for a maximum {@code toDate} value (often '9999-01-01').
  *
  * @author Ilyas & Wei Xian
  * @see SalaryId
@@ -31,8 +31,8 @@ public class Salaries {
 
     /**
      * Part of the composite primary key. The unique identifier of the employee.
-     * Maps to the column **"emp_no"** in the "salaries" table.
-     * * This field is ignored during JSON serialization to prevent redundancy, as the employee relationship is also present.
+     * Maps to the column "emp_no" in the "salaries" table.
+     * This field is ignored during JSON serialization to prevent redundancy, as the employee relationship is also present.
      */
     @Id
     @Column(name = "emp_no")
@@ -41,7 +41,7 @@ public class Salaries {
 
     /**
      * The associated {@link Employee} entity.
-     * This forms a **Many-to-One** relationship.
+     * This forms a Many-to-One relationship.
      * The join column is {@code emp_no}, which is neither insertable nor updatable
      * as it is part of the composite key defined locally.
      * {@code @JsonBackReference} is used to prevent infinite recursion during JSON serialization.
@@ -58,7 +58,7 @@ public class Salaries {
 
     /**
      * Part of the composite primary key. The start date for which this salary is valid.
-     * Maps to the column **"from_date"**.
+     * Maps to the column "from_date".
      */
     @Id
     @Column(name = "from_date")
@@ -66,7 +66,7 @@ public class Salaries {
 
     /**
      * The end date for which this salary is valid.
-     * Maps to the column **"to_date"**.
+     * Maps to the column "to_date".
      * A value of '9999-01-01' often signifies the current, active salary.
      */
     @Column(name = "to_date")

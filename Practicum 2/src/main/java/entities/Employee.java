@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * **Employee** is a JPA entity that represents a single employee record in the database.
+ * Employee is a JPA entity that represents a single employee record in the database.
  *
- * * It is mapped to the **"employees"** table and serves as the core entity for personnel data.
- * * It stores basic biographical information and maintains **One-to-Many** relationships with all
+ * It is mapped to the "employees" table and serves as the core entity for personnel data.
+ * It stores basic biographical information and maintains One-to-Many relationships with all
  * associated history tables: titles, salaries, department assignments, and manager assignments.
  *
  * @author Ilyas & Wei Xian
@@ -21,7 +21,7 @@ public class Employee {
 
     /**
      * The unique employee number, serving as the primary key.
-     * Maps to the column **"emp_no"** in the "employees" table.
+     * Maps to the column "emp_no" in the "employees" table.
      */
     @Id
     @Column(name = "emp_no")
@@ -29,42 +29,42 @@ public class Employee {
 
     /**
      * The employee's date of birth.
-     * Maps to the column **"birth_date"**.
+     * Maps to the column "birth_date".
      */
     @Column(name = "birth_date")
     private LocalDate birth_date;
 
     /**
      * The employee's first name.
-     * Maps to the column **"first_name"**.
+     * Maps to the column "first_name".
      */
     @Column(name = "first_name")
     private String first_name;
 
     /**
      * The employee's last name.
-     * Maps to the column **"last_name"**.
+     * Maps to the column "last_name".
      */
     @Column(name = "last_name")
     private String last_name;
 
     /**
      * The employee's gender (e.g., 'M' or 'F').
-     * Maps to the column **"gender"**.
+     * Maps to the column "gender".
      */
     @Column(name = "gender")
     private String gender;
 
     /**
      * The date the employee was hired.
-     * Maps to the column **"hire_date"**.
+     * Maps to the column "hire_date".
      */
     @Column(name = "hire_date")
     private LocalDate hire_date;
 
     /**
      * A list of {@link Titles} records associated with this employee.
-     * This **One-to-Many** relationship is fetched lazily and ordered by {@code toDate} ascending.
+     * This One-to-Many relationship is fetched lazily and ordered by {@code toDate} ascending.
      * {@code @JsonManagedReference} indicates this side manages the JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
@@ -74,7 +74,7 @@ public class Employee {
 
     /**
      * A list of {@link Salaries} records associated with this employee.
-     * This **One-to-Many** relationship is fetched lazily and ordered by {@code toDate} ascending.
+     * This One-to-Many relationship is fetched lazily and ordered by {@code toDate} ascending.
      * {@code @JsonManagedReference} indicates this side manages the JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
@@ -84,7 +84,7 @@ public class Employee {
 
     /**
      * A list of {@link DepartmentEmployee} records (department assignments) associated with this employee.
-     * This **One-to-Many** relationship is fetched lazily and ordered by {@code toDate} ascending.
+     * This One-to-Many relationship is fetched lazily and ordered by {@code toDate} ascending.
      * {@code @JsonManagedReference} indicates this side manages the JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
@@ -94,7 +94,7 @@ public class Employee {
 
     /**
      * A list of {@link DepartmentManager} records (manager assignments) associated with this employee.
-     * This **One-to-Many** relationship is fetched lazily and ordered by {@code toDate} ascending.
+     * This One-to-Many relationship is fetched lazily and ordered by {@code toDate} ascending.
      * {@code @JsonManagedReference} indicates this side manages the JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")

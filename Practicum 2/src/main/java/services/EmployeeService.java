@@ -7,6 +7,12 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * EmployeeService is a RESTful service that provides endpoints for managing employees.
+ * It is used to search for employees by number and promote employees.
+ * {@code @Path("/employee")} is the base path for the EmployeeService.
+ * @author Ilyas & Wei Xian
+ */
 @Path("/employee")
 public class EmployeeService {
     private BusinessLogic businessLogic;
@@ -15,6 +21,11 @@ public class EmployeeService {
         businessLogic = new BusinessLogic();
     }
 
+    /**
+     * GET endpoint to search for employees by number.
+     * @param emp_no The employee number.
+     * @return A {@link Employee} object.
+     */
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
@@ -40,13 +51,11 @@ public class EmployeeService {
     }
 
 
-    @GET
-    @Path("/ping")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String ping() {
-        return "pong";
-    }
-
+    /**
+     * POST endpoint to promote an employee.
+     * @param employee The {@link PromotionDTO} object containing the promotion details.
+     * @return A {@link Response} object containing the response from the promotion.
+     */
     @POST
     @Path("/promotion")
     @Produces(MediaType.APPLICATION_JSON)

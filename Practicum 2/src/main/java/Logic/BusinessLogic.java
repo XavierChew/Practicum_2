@@ -19,10 +19,9 @@ import java.util.List;
 
  /**
   * BusinessLogic class is the main class for the employee service.
-  * It is responsible for the business logic of the employee service.
-  * It is responsible for the data access of the employee service.
-  * It is responsible for the validation of the employee service.
-  * It is responsible for the promotion of the employee service.
+  * <p>
+  * It handles the business logic, data access, and validation of the employee service.
+  * </p>
   * @author: Ilyas & Wei Xian
   */
  public class  BusinessLogic {
@@ -38,7 +37,7 @@ import java.util.List;
      }
 
      /**
-      * getEntityManagerFactory method is used to get the entity manager factory.
+      * getEntityManagerFactory method is used to get the {@link EntityManagerFactory} object.
       * @return EntityManagerFactory
       */
      public static EntityManagerFactory getEntityManagerFactory() {
@@ -58,7 +57,7 @@ import java.util.List;
      }
 
      /**
-      * closeEntityManagerFactory method is used to close the entity manager factory.
+      * closeEntityManagerFactory method is used to close the {@link EntityManagerFactory} object.
       */
      public static void closeEntityManagerFactory() {
          if (emf != null && emf.isOpen()) {
@@ -69,7 +68,7 @@ import java.util.List;
 
      /**
       * findAllDepartment method is used to find all departments.
-      * @return List<Department>
+      * @return List<Department> object containing all departments
       */
      public List<Department> findAllDepartment() {
          EntityManager em = emf.createEntityManager();
@@ -90,8 +89,8 @@ import java.util.List;
 
      /**
       * findFullEmployeeRecord method is used to find a full employee record.
-      * @param empNo
-      * @return Employee
+      * @param empNo employee number
+      * @return Employee object containing the full employee record
       */
      public Employee findFullEmployeeRecord(int empNo) {
          EntityManager em = emf.createEntityManager();
@@ -121,9 +120,10 @@ import java.util.List;
 
      /**
       * findEmployeesByDepartment method is used to find employees by department.
-      * @param dept_no
-      * @param page
-      * @return List<EmployeeDTO>
+      * @param dept_no department number
+      * @param page page number
+      * @return List<{@link EmployeeDTO}> object containing the employees by department
+      * @author Ilyas & Wei Xian
       */
      public List<EmployeeDTO> findEmployeesByDepartment(String dept_no, int page) {
          EntityManager em = emf.createEntityManager();
@@ -151,8 +151,9 @@ import java.util.List;
 
      /**
       * promoteEmployee method is used to promote an employee.
-      * @param promotion
-      * @return Response
+      * @param promotion {@link PromotionDTO} object containing promotion details
+      * @return {@link Response} object containing the response from the promotion
+      * @author Ilyas & Wei Xian
       */
      public Response promoteEmployee(PromotionDTO promotion) {
          EntityManager em = emf.createEntityManager();
@@ -161,21 +162,26 @@ import java.util.List;
          System.out.println(promotion.toString());
          try {
              Employee employee = em.find(Employee.class, promotion.getEmpNo());
-             if (employee == null) {
+             if (employee == null) { // check if employee exists
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
+             // check if promotion details are provided
              if (promotion.getTitle() == null && promotion.getDepartmentID() == null && promotion.getSalary() == 0) {
                  return Response.ok("No details provided for promotion").build();
              }
+             // check if salary is valid
              if (promotion.getSalary() < 0) {
                  return Response.ok("Invalid salary input").build();
              }
+             // check if department exists
              Department department = em.find(Department.class, promotion.getDepartmentID());
              if (department == null) {
                  return Response.ok("Invalid department ID").build();
              }
+             // check if title is provided
              if (promotion.getTitle() != null) {
+                 // update title
              System.out.println("Title update:");
                  em.createNamedQuery("Titles.updateTitleDate")
                          .setParameter("toDate", LocalDate.now())
@@ -185,7 +191,9 @@ import java.util.List;
              }
                 Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
                 em.persist(title);
+             // check if salary is provided
              if (promotion.getSalary() != 0) {
+                 // update salary
                  System.out.println("Salary update:");
                  em.createNamedQuery("Salaries.updateSalaryDate")
                          .setParameter("toDate", LocalDate.now())
@@ -195,6 +203,7 @@ import java.util.List;
                  Salaries salary = new Salaries(promotion.getEmpNo(), promotion.getSalary(), LocalDate.now());
                  em.persist(salary);
              }
+             // check if department is provided
              if (promotion.getDepartmentID() != null) {
                  System.out.println("Department update:");
                  em.createNamedQuery("DepartmentEmployee.updateDepartmentDate")
@@ -206,11 +215,14 @@ import java.util.List;
                  em.persist(deptEmp);
              }
 
+             // check if employee is promoted to manager
              if (promotion.getTitle().toLowerCase().equals("manager")) {
+                 // check if department is provided
                  if (promotion.getDepartmentID() == null) {
                      System.out.println("dept id: "+ employee.getDeptEmpList().get(0).getDeptNo());
                      promotion.setDepartmentID(employee.getDeptEmpList().get(0).getDeptNo());
                  }
+                 // create new department manager record
                  DepartmentManager deptManager = new DepartmentManager(promotion.getDepartmentID(), promotion.getEmpNo(), LocalDate.now());
                  em.persist(deptManager);
              }

@@ -5,15 +5,15 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * **TitleId** is a composite key class used by the Titles entity.
+ * TitleId is a composite key class used by the Titles entity.
  *
- * * This class implements the {@link Serializable} interface and defines the structure
- * for the composite primary key of the **"titles"** table in the database.
- * * It combines the **employee number** (empNo), the **title name** (title), and the
- * **starting date of the title** (fromDate) to uniquely identify a specific title record.
+ * This class implements the {@link Serializable} interface and defines the structure
+ * for the composite primary key of the "titles" table in the database.
+ * It combines the employee number (empNo), the title name (title), and the
+ * starting date of the title (fromDate) to uniquely identify a specific title record.
  * This is necessary because an employee can hold the same title multiple times with
  * different start dates.
- * * **Important:** As required by the JPA specification for composite keys, this class must
+ * <b>Important:</b> As required by the JPA specification for composite keys, this class must
  * override the {@code equals()} and {@code hashCode()} methods.
  *
  * @see Titles

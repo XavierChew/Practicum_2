@@ -42,7 +42,7 @@ public class DepartmentEmployee {
 
     /**
      * The associated {@link Employee} entity.
-     * This forms a **Many-to-One** relationship.
+     * This forms a Many-to-One relationship.
      * The join column is {@code emp_no}, which is neither insertable nor updatable
      * as it is part of the composite key defined locally.
      * {@code @JsonBackReference} is used to prevent infinite recursion during JSON serialization.
@@ -54,7 +54,7 @@ public class DepartmentEmployee {
 
     /**
      * The associated {@link Department} entity.
-     * This forms a **Many-to-One** relationship.
+     * This forms a Many-to-One relationship.
      * The join column is {@code dept_no}, which is neither insertable nor updatable.
      * {@code @JsonIgnoreProperties} is used to ignore Hibernate-specific fields during serialization.
      */
@@ -65,14 +65,14 @@ public class DepartmentEmployee {
 
     /**
      * The date the employee started working in this department.
-     * Maps to the column **"from_date"**.
+     * Maps to the column "from_date".
      */
     @Column(name = "from_date")
     private LocalDate fromDate;
 
     /**
      * The date the employee stopped working in this department.
-     * Maps to the column **"to_date"**.
+     * Maps to the column "to_date".
      */
     @Column(name = "to_date")
     private LocalDate toDate;

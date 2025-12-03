@@ -16,7 +16,7 @@ public class Department {
 
     /**
      * The unique identifier for the department.
-     * Maps to the primary key column **"dept_no"** in the "departments" table.
+     * Maps to the primary key column "dept_no" in the "departments" table.
      */
     @Id
     @Column(name = "dept_no")
@@ -24,7 +24,7 @@ public class Department {
 
     /**
      * The official name of the department.
-     * Maps to the column **"dept_name"** in the "departments" table.
+     * Maps to the column "dept_name" in the "departments" table.
      */
     @Column(name = "dept_name")
     private String deptName;
@@ -36,7 +36,7 @@ public class Department {
      * This establishes a One-to-Many relationship.
      * The relationship is fetched lazily and mapped by the "department" field in the
      * {@code DepartmentEmployee} entity.
-     * * This field is ignored during JSON serialization.
+     * This field is ignored during JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     @JsonIgnore
@@ -47,7 +47,7 @@ public class Department {
      * This establishes a One-to-Many relationship.
      * The relationship is fetched lazily and mapped by the "department" field in the
      * {@code DepartmentEmployee} entity.
-     * * This field is ignored during JSON serialization.
+     * This field is ignored during JSON serialization.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     @JsonIgnore

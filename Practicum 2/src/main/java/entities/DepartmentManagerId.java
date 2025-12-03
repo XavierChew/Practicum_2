@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * **DepartmentManagerId** is a composite key class used by the {@link DepartmentManager} entity.
+ * DepartmentManagerId is a composite key class used by the {@link DepartmentManager} entity.
  *
- * * This class implements the {@link Serializable} interface and defines the structure
- * for the composite primary key of the **"dept_manager"** table in the database.
- * * It combines the **department number** (deptNo) and the **employee number** (empNo)
+ * This class implements the {@link Serializable} interface and defines the structure
+ * for the composite primary key of the "dept_manager" table in the database.
+ * It combines the department number (deptNo) and the employee number (empNo)
  * to uniquely identify a specific manager assignment record.
- * * **Important:** As required by the JPA specification for composite keys, this class must
+ * <b>Important:</b> As required by the JPA specification for composite keys, this class must
  * override the {@code equals()} and {@code hashCode()} methods.
  *
  * @see DepartmentManager

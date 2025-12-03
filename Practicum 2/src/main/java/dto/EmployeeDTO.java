@@ -15,6 +15,18 @@ public class EmployeeDTO {
     private String last_name;
     private LocalDate hire_date;
 
+    /**
+     * Default constructor for creating a new EmployeeDTO object.
+     */
+    public EmployeeDTO() {}
+
+    /**
+     * Constructor for creating a new EmployeeDTO object.
+     * @param emp_no The employee number.
+     * @param first_name The first name of the employee.
+     * @param last_name The last name of the employee.
+     * @param hire_date The hire date of the employee.
+     */
     public EmployeeDTO(int emp_no, String first_name, String last_name, LocalDate hire_date) {
         this.emp_no = emp_no;
         this.first_name = first_name;
@@ -22,34 +34,66 @@ public class EmployeeDTO {
         this.hire_date = hire_date;
     }
 
+    /**
+     * Retrieves the employee number.
+     * @return The employee number.
+     */
     public int getEmp_no() {
         return emp_no;
     }
 
+    /**
+     * Retrieves the first name of the employee.
+     * @return The first name of the employee.
+     */
     public String getFirst_name() {
         return first_name;
     }
     
+    /**
+     * Retrieves the last name of the employee.
+     * @return The last name of the employee.
+     */
     public String getLast_name() {
         return last_name;
     }
 
+    /**
+     * Retrieves the hire date of the employee.
+     * @return The hire date of the employee.
+     */
     public LocalDate getHire_date() {
         return hire_date;
     }
 
+    /**
+     * Sets the employee number.
+     * @param emp_no The employee number to set.
+     */
     public void setEmp_no(int emp_no) {
         this.emp_no = emp_no;
     }
 
+    /**
+     * Sets the first name of the employee.
+     * @param first_name The first name of the employee to set.
+     */
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
     
+    /**
+     * Sets the last name of the employee.
+     * @param last_name The last name of the employee to set.
+     */
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
+    /**
+     * Sets the hire date of the employee.
+     * @param hire_date The hire date of the employee to set.
+     */
     public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
     }

@@ -7,7 +7,12 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 
-
+/**
+ * DepartmentService is a RESTful service that provides endpoints for managing departments.
+ * It is used to get all departments and search for employees by department.
+ * {@code @Path("/departments")} is the base path for the DepartmentService.
+ * @author Ilyas & Wei Xian
+ */
 @Path("/departments")
 public class DepartmentService {
     private BusinessLogic businessLogic;
@@ -16,6 +21,10 @@ public class DepartmentService {
         businessLogic = new BusinessLogic();
     }
 
+    /**
+     * GET endpoint to retrieve all departments.
+     * @return A list of {@link Department} objects.
+     */
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +37,12 @@ public class DepartmentService {
         return Response.ok(departments).build();
     }
 
+    /**
+     * GET endpoint to search for employees by department.
+     * @param dept_no The department number.
+     * @param page The page number.
+     * @return A list of {@link EmployeeDTO} objects.
+     */
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)

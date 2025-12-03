@@ -5,14 +5,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * **SalaryId** is a composite key class used by the {@link Salaries} entity.
+ * SalaryId is a composite key class used by the {@link Salaries} entity.
  *
- * * This class implements the {@link Serializable} interface and defines the structure
- * for the composite primary key of the **"salaries"** table in the database.
- * * It combines the **employee number** (empNo) and the **starting date of the salary** (fromDate)
+ * This class implements the {@link Serializable} interface and defines the structure
+ * for the composite primary key of the "salaries" table in the database.
+ * It combines the employee number (empNo) and the starting date of the salary (fromDate)
  * to uniquely identify a specific salary record, as an employee can have multiple salaries over time,
  * but only one starting on a particular date.
- * * **Important:** As required by the JPA specification for composite keys, this class must
+ * <b>Important:</b> As required by the JPA specification for composite keys, this class must
  * override the {@code equals()} and {@code hashCode()} methods.
  *
  * @see Salaries

@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 /**
- * **DepartmentManager** is a JPA entity representing the assignment of an employee as a manager
+ * DepartmentManager is a JPA entity representing the assignment of an employee as a manager
  * of a specific department over a period of time.
  *
- * * It is mapped to the **"dept_manager"** table and uses a composite primary key defined by {@link DepartmentManagerId}.
- * * This entity manages the many-to-many relationship between the {@link Employee} and {@link Department} entities,
+ *  It is mapped to the "dept_manager" table and uses a composite primary key defined by {@link DepartmentManagerId}.
+ *  This entity manages the many-to-many relationship between the {@link Employee} and {@link Department} entities,
  * capturing the historical record of managerial appointments with start and end dates.
  *
  * @author Ilyas & Wei Xian
@@ -24,7 +24,7 @@ public class DepartmentManager {
 
     /**
      * Part of the composite primary key. The unique identifier of the department being managed.
-     * Maps to the column **"dept_no"** in the "dept_manager" table.
+     * Maps to the column "dept_no" in the "dept_manager" table.
      */
     @Id
     @Column(name = "dept_no")
@@ -32,8 +32,8 @@ public class DepartmentManager {
 
     /**
      * Part of the composite primary key. The unique identifier of the employee who is the manager.
-     * Maps to the column **"emp_no"** in the "dept_manager" table.
-     * * This field is ignored during JSON serialization to prevent redundancy, as the employee relationship is also present.
+     * Maps to the column "emp_no" in the "dept_manager" table.
+     * This field is ignored during JSON serialization to prevent redundancy, as the employee relationship is also present.
      */
     @Id
     @Column(name = "emp_no")
@@ -42,7 +42,7 @@ public class DepartmentManager {
 
     /**
      * The associated {@link Department} entity that this employee manages.
-     * This forms a **Many-to-One** relationship.
+     * This forms a Many-to-One relationship.
      * The join column is {@code dept_no}, which is neither insertable nor updatable
      * as it is part of the composite key defined locally.
      * {@code @JsonIgnoreProperties} is used to ignore Hibernate-specific fields during serialization.
@@ -54,7 +54,7 @@ public class DepartmentManager {
 
     /**
      * The associated {@link Employee} entity who holds the manager position.
-     * This forms a **Many-to-One** relationship.
+     * This forms a Many-to-One relationship.
      * The join column is {@code emp_no}, which is neither insertable nor updatable.
      * {@code @JsonBackReference} is used to prevent infinite recursion during JSON serialization.
      */
@@ -65,14 +65,14 @@ public class DepartmentManager {
 
     /**
      * The date the employee started their managerial position in this department.
-     * Maps to the column **"from_date"**.
+     * Maps to the column "from_date".
      */
     @Column(name = "from_date")
     private LocalDate fromDate;
 
     /**
      * The date the employee ended their managerial position in this department.
-     * Maps to the column **"to_date"**.
+     * Maps to the column "to_date".
      * A value of '9999-01-01' often signifies the current assignment.
      */
     @Column(name = "to_date")
