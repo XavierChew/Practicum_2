@@ -28,12 +28,6 @@ public class DepartmentService {
         return Response.ok(departments).build();
     }
 
-    // An endpoint for getting all employee records (info to return: employee number, first
-    //     name, last name and hire date) from a given department number and a optional page
-    //     number that defaults to 1. The results are to be paged and each page has a maximum
-    //     of 20 records. User inputs a department number and an optional page number to
-    //     retrieve the data. Note that in terms of computing, page numbers start from to
-    //     but from the users point of view, pages start from to .
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,8 +55,5 @@ public class DepartmentService {
         }
 
         return Response.ok(businessLogic.findEmployeesByDepartment(dept_no, page)).build();
-        // return Response.status(Response.Status.OK)
-        //     .entity("Page number: " + page)
-        //     .build();
     }
 }
