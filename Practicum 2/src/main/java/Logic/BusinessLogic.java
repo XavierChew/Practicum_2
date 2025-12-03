@@ -175,6 +175,26 @@ import java.util.List;
 
              // check if title is provided
              if (promotion.getTitle() != null) {
+
+                 // query to get employee current title
+                 Titles currentTitle = em.createQuery(
+                                 "SELECT t FROM Titles t " +
+                                         "WHERE t.empNo = :empNo AND t.toDate = :present",
+                                 Titles.class)
+                         .setParameter("empNo", promotion.getEmpNo())
+                         .setParameter("present", LocalDate.of(9999, 1, 1))
+                         .getSingleResult();
+
+                 // rollback if same title
+                 if (currentTitle != null &&
+                         currentTitle.getTitle().equalsIgnoreCase(promotion.getTitle())) {
+
+                     em.getTransaction().rollback();
+                     return Response.status(Response.Status.BAD_REQUEST)
+                             .entity("Employee already holds the title: " + promotion.getTitle())
+                             .build();
+                 }
+
                  // update title
              System.out.println("Title update:");
                  em.createNamedQuery("Titles.updateTitleDate")
