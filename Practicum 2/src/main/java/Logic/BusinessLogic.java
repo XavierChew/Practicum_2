@@ -168,6 +168,13 @@ import java.util.List;
              if (promotion.getTitle() == null && promotion.getDepartmentID() == null && promotion.getSalary() == 0) {
                  return Response.ok("No details provided for promotion").build();
              }
+             if (promotion.getSalary() < 0) {
+                 return Response.ok("Invalid salary input").build();
+             }
+             Department department = em.find(Department.class, promotion.getDepartmentID());
+             if (department == null) {
+                 return Response.ok("Invalid department ID").build();
+             }
              if (promotion.getTitle() != null) {
              System.out.println("Title update:");
                  em.createNamedQuery("Titles.updateTitleDate")
