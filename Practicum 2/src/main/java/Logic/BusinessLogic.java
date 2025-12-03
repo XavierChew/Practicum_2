@@ -45,12 +45,6 @@ import java.util.List;
          return emf;
      }
 
-     public static void closeEntityManagerFactory() {
-         if (emf != null && emf.isOpen()) {
-             emf.close();
-             emf = null;
-         }
-     }
 
      public List<Department> findAllDepartment() {
          EntityManager em = emf.createEntityManager();
@@ -80,13 +74,13 @@ import java.util.List;
                  emp.getDeptEmpList().size();
                  emp.getDeptManagerList().size();
 
-                 // Initialize nested lazy proxies
+
                  for (DepartmentEmployee de : emp.getDeptEmpList()) {
-                     de.getDepartment().getDeptName(); // access at least one property
+                     de.getDepartment().getDeptName();
                  }
                  // Initialize nested Department in DepartmentManager
                  for (DepartmentManager dm : emp.getDeptManagerList()) {
-                     dm.getDepartment().getDeptName(); // access a real property
+                     dm.getDepartment().getDeptName();
                  }
              }
              return emp;
