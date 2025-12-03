@@ -3,19 +3,41 @@ package dto;
 import java.time.LocalDate;
 
 /**
- * EmployeeDTO is a data transfer object for the Employee entity.
- * It is used to transfer data between the client and the server.
- * It is not an entity itself, but it is used to transfer data between the client and the server.
- * It is not persisted to the database.
- * @author: Ilyas & Wei Xian
+ * **EmployeeDTO** is a **Data Transfer Object (DTO)** for conveying essential employee information.
+ *
+ * <p>It is used primarily to transfer a subset of data from the {@link entities.Employee Employee entity}
+ * between the server and client, often to reduce payload size or hide sensitive fields
+ * (like salary, birth date, or gender) that are not needed by the client.</p>
+ *
+ * * This class is a simple object containing only data fields, constructors, and accessor methods.
+ * * It is **not persisted** to the database.
+ * * @author Ilyas & Wei Xian
+ *
  */
 public class EmployeeDTO {
+
+    /**
+     * The unique employee number.
+     */
     private int emp_no;
+
+    /**
+     * The employee's first name.
+     */
     private String first_name;
+
+    /**
+     * The employee's last name.
+     */
     private String last_name;
+
+    /**
+     * The employee's hire date.
+     */
     private LocalDate hire_date;
 
     /**
+<<<<<<< HEAD
      * Default constructor for creating a new EmployeeDTO object.
      */
     public EmployeeDTO() {}
@@ -26,6 +48,14 @@ public class EmployeeDTO {
      * @param first_name The first name of the employee.
      * @param last_name The last name of the employee.
      * @param hire_date The hire date of the employee.
+=======
+     * Parameterized constructor for creating an {@code EmployeeDTO} instance.
+     *
+     * @param emp_no The employee number.
+     * @param first_name The employee's first name.
+     * @param last_name The employee's last name.
+     * @param hire_date The employee's hire date.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public EmployeeDTO(int emp_no, String first_name, String last_name, LocalDate hire_date) {
         this.emp_no = emp_no;
@@ -43,24 +73,41 @@ public class EmployeeDTO {
     }
 
     /**
+<<<<<<< HEAD
      * Retrieves the first name of the employee.
      * @return The first name of the employee.
+=======
+     * Retrieves the employee's first name.
+     * @return The first name.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public String getFirst_name() {
         return first_name;
     }
+<<<<<<< HEAD
     
     /**
      * Retrieves the last name of the employee.
      * @return The last name of the employee.
+=======
+
+    /**
+     * Retrieves the employee's last name.
+     * @return The last name.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public String getLast_name() {
         return last_name;
     }
 
     /**
+<<<<<<< HEAD
      * Retrieves the hire date of the employee.
      * @return The hire date of the employee.
+=======
+     * Retrieves the employee's hire date.
+     * @return The hire date.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public LocalDate getHire_date() {
         return hire_date;
@@ -75,24 +122,41 @@ public class EmployeeDTO {
     }
 
     /**
+<<<<<<< HEAD
      * Sets the first name of the employee.
      * @param first_name The first name of the employee to set.
+=======
+     * Sets the employee's first name.
+     * @param first_name The first name to set.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
+<<<<<<< HEAD
     
     /**
      * Sets the last name of the employee.
      * @param last_name The last name of the employee to set.
+=======
+
+    /**
+     * Sets the employee's last name.
+     * @param last_name The last name to set.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
 
     /**
+<<<<<<< HEAD
      * Sets the hire date of the employee.
      * @param hire_date The hire date of the employee to set.
+=======
+     * Sets the employee's hire date.
+     * @param hire_date The hire date to set.
+>>>>>>> b577c8fd004072339d7e960818dbca705962e435
      */
     public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
