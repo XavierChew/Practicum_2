@@ -130,6 +130,9 @@ import java.util.List;
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
+             if (promotion.getTitle() == null && promotion.getDepartmentID() == null && promotion.getSalary() == 0) {
+                 return Response.ok("No details provided for promotion").build();
+             }
              if (promotion.getTitle() != null) {
              System.out.println("Title update:");
                  em.createNamedQuery("Titles.updateTitleDate")
