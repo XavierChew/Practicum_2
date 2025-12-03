@@ -166,6 +166,7 @@ import java.util.List;
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
              }
+             System.out.println("employee found");
              // check if promotion details are provided
              if (promotion.getTitle() == null && promotion.getDepartmentID() == null && promotion.getSalary() == 0) {
                  return Response.ok("No details provided for promotion").build();
@@ -175,10 +176,13 @@ import java.util.List;
                  return Response.ok("Invalid salary input").build();
              }
              // check if department exists
-             Department department = em.find(Department.class, promotion.getDepartmentID());
-             if (department == null) {
-                 return Response.ok("Invalid department ID").build();
+             if (promotion.getDepartmentID() != null) {
+                Department department = em.find(Department.class, promotion.getDepartmentID());
+                 if (department == null) {
+                     return Response.ok("Invalid department ID").build();
+                 }
              }
+
              // check if title is provided
              if (promotion.getTitle() != null) {
                  // update title
@@ -188,9 +192,10 @@ import java.util.List;
                          .setParameter("emp_no", promotion.getEmpNo())
                          .setParameter("date", toPresentDate)
                          .executeUpdate();
+                 Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
+                 em.persist(title);
              }
-                Titles title = new Titles(promotion.getEmpNo(), promotion.getTitle(), LocalDate.now());
-                em.persist(title);
+
              // check if salary is provided
              if (promotion.getSalary() != 0) {
                  // update salary
