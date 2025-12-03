@@ -49,11 +49,13 @@ public class DepartmentService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeesByDepartment(@QueryParam("dept_no") @DefaultValue("") String dept_no, @QueryParam("page") @DefaultValue("1") int page) {
 
+        // Validation for negative page
         if (page < 1) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Page number must be greater than 0")
                     .build();
         }
+        // Validation for empty department
         if (dept_no == null || dept_no.isEmpty()) {
             return Response.ok("No input for department number").build();
         }
