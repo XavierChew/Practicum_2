@@ -17,6 +17,14 @@ import java.util.List;
  import java.time.LocalDate;
  import entities.Salaries;
 
+ /**
+  * BusinessLogic class is the main class for the employee service.
+  * It is responsible for the business logic of the employee service.
+  * It is responsible for the data access of the employee service.
+  * It is responsible for the validation of the employee service.
+  * It is responsible for the promotion of the employee service.
+  * @author: Ilyas & Wei Xian
+  */
  public class  BusinessLogic {
 
      private static final String DBNAME = "employees";
@@ -29,6 +37,10 @@ import java.util.List;
          em = emf.createEntityManager();
      }
 
+     /**
+      * getEntityManagerFactory method is used to get the entity manager factory.
+      * @return EntityManagerFactory
+      */
      public static EntityManagerFactory getEntityManagerFactory() {
 
          if (emf == null) {
@@ -45,7 +57,20 @@ import java.util.List;
          return emf;
      }
 
+     /**
+      * closeEntityManagerFactory method is used to close the entity manager factory.
+      */
+     public static void closeEntityManagerFactory() {
+         if (emf != null && emf.isOpen()) {
+             emf.close();
+             emf = null;
+         }
+     }
 
+     /**
+      * findAllDepartment method is used to find all departments.
+      * @return List<Department>
+      */
      public List<Department> findAllDepartment() {
          EntityManager em = emf.createEntityManager();
          List<Department> departments = new ArrayList<>();
@@ -63,6 +88,11 @@ import java.util.List;
          return departments;
      }
 
+     /**
+      * findFullEmployeeRecord method is used to find a full employee record.
+      * @param empNo
+      * @return Employee
+      */
      public Employee findFullEmployeeRecord(int empNo) {
          EntityManager em = emf.createEntityManager();
          try {
@@ -89,6 +119,12 @@ import java.util.List;
          }
      }
 
+     /**
+      * findEmployeesByDepartment method is used to find employees by department.
+      * @param dept_no
+      * @param page
+      * @return List<EmployeeDTO>
+      */
      public List<EmployeeDTO> findEmployeesByDepartment(String dept_no, int page) {
          EntityManager em = emf.createEntityManager();
          List<EmployeeDTO> employees = new ArrayList<>();
@@ -113,6 +149,11 @@ import java.util.List;
          return employees;
      }
 
+     /**
+      * promoteEmployee method is used to promote an employee.
+      * @param promotion
+      * @return Response
+      */
      public Response promoteEmployee(PromotionDTO promotion) {
          EntityManager em = emf.createEntityManager();
          em.getTransaction().begin();
@@ -123,6 +164,9 @@ import java.util.List;
              if (employee == null) {
                  return Response.status(Response.Status.NOT_FOUND)
                          .entity("No employee record for ID: " + promotion.getEmpNo()).build();
+             }
+             if (promotion.getTitle() == null && promotion.getDepartmentID() == null && promotion.getSalary() == 0) {
+                 return Response.ok("No details provided for promotion").build();
              }
              if (promotion.getTitle() != null) {
              System.out.println("Title update:");
