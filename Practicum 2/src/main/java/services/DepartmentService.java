@@ -16,7 +16,6 @@ import java.util.List;
 @Path("/departments")
 public class DepartmentService {
     private BusinessLogic businessLogic;
-
     public DepartmentService() {
         businessLogic = new BusinessLogic();
     }
